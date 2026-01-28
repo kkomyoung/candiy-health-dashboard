@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Login from '@/pages/Login';
 import ProtectedRoute from '@/router/ProtectedRoute.tsx';
 import MainLayout from '@/layouts/MainLayout.tsx';
-import Home from '@/pages/Home.tsx';
-import Dashboard from '@/pages/Dashboard.tsx';
-import History from '@/pages/History.tsx';
+import Login from '@/pages/Login';
+import Home from '@/pages/Home';
+import Dashboard from '@/pages/Dashboard';
+import History from '@/pages/History';
 
 export const router = createBrowserRouter([
 	{
