@@ -1,6 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from '@/pages/Login';
 import ProtectedRoute from '@/router/ProtectedRoute.tsx';
+import MainLayout from '@/layouts/MainLayout.tsx';
+import Home from '@/pages/Home.tsx';
+import Dashboard from '@/pages/Dashboard.tsx';
+import History from '@/pages/History.tsx';
 
 export const router = createBrowserRouter([
 	{
@@ -8,12 +12,24 @@ export const router = createBrowserRouter([
 		element: <Login />,
 	},
 	{
-		path: '/',
 		element: <ProtectedRoute />,
 		children: [
 			{
-				index: true,
-				element: <div>로그인 완료</div>,
+				element: <MainLayout />,
+				children: [
+					{
+						path: '/',
+						element: <Home />,
+					},
+					{
+						path: '/dashboard',
+						element: <Dashboard />,
+					},
+					{
+						path: '/history',
+						element: <History />,
+					},
+				],
 			},
 		],
 	},
