@@ -1,5 +1,5 @@
-/** 한번에보기 아이템 */
-export interface OverviewItem {
+/** 건강검진 한눈에보기 항목 */
+export interface CheckupOverview {
 	checkupDate: string;
 	height: string;
 	weight: string;
@@ -25,8 +25,8 @@ export interface OverviewItem {
 	evaluation: string;
 }
 
-/** 참고치 아이템 */
-export interface ReferenceItem {
+/** 건강검진 참고치 항목 */
+export interface CheckupReference {
 	refType: string;
 	height: string;
 	weight: string;
@@ -51,8 +51,8 @@ export interface ReferenceItem {
 	osteoporosis: string;
 }
 
-/** 검진 결과 아이템 */
-export interface ResultItem {
+/** 건강검진 결과 항목 */
+export interface CheckupResult {
 	caseType: number;
 	checkupType: string;
 	checkupDate: string;
@@ -64,9 +64,9 @@ export interface ResultItem {
 }
 
 /** 건강검진 전체 데이터 */
-export interface NhisCheckupData {
+export interface CheckupData {
 	patientName: string;
-	overviewList: OverviewItem[];
-	referenceList: ReferenceItem[];
-	resultList: ResultItem[];
+	overviewList: CheckupOverview[];
+	referenceList: CheckupReference[];
+	resultList: CheckupResult[];
 }

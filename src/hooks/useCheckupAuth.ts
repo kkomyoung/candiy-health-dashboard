@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestCheckupAuth, confirmCheckupAuth } from '@/services/checkupApi';
-import type { NhisCheckupRequest, MultiFactorInfo } from '@/types/api';
+import type { CheckupAuthRequest, MultiFactorInfo } from '@/types/checkupAuth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CHECKUP_QUERY_KEY } from '@/hooks/useCheckupData.ts';
 
@@ -22,10 +22,10 @@ export function useCheckupAuth() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	// 1차 인증에서 사용한 요청 파라미터 저장 (2차 인증에서 필요)
-	const [requestParams, setRequestParams] = useState<NhisCheckupRequest | null>(() => null);
+	const [requestParams, setRequestParams] = useState<CheckupAuthRequest | null>(() => null);
 
 	// 요청에 필요한 기본 파라미터 생성
-	const createRequestParams = useCallback((formData: UserFormInput): NhisCheckupRequest => {
+	const createRequestParams = useCallback((formData: UserFormInput): CheckupAuthRequest => {
 		const currentYear = new Date().getFullYear();
 		return {
 			id: uuid,

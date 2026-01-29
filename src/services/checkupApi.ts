@@ -1,10 +1,10 @@
-import {
-	ApiError,
-	type NhisCheckupRequest,
-	type NhisCheckupAuthResponse,
-	type NhisCheckupConfirmRequest,
-	type NhisCheckupDataResponse,
-} from '@/types/api';
+import { ApiError } from '@/types/api';
+import type {
+	CheckupAuthRequest,
+	CheckupAuthResponse,
+	CheckupConfirmRequest,
+	CheckupDataResponse,
+} from '@/types/checkupAuth';
 
 const API_BASE_URL = '/api';
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -12,7 +12,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 /**
  * 1차 인증 요청 - 간편인증 요청
  */
-export async function requestCheckupAuth(params: NhisCheckupRequest): Promise<NhisCheckupAuthResponse> {
+export async function requestCheckupAuth(params: CheckupAuthRequest): Promise<CheckupAuthResponse> {
 	const response = await fetch(`${API_BASE_URL}/nhis/checkup`, {
 		method: 'POST',
 		headers: {
@@ -38,7 +38,7 @@ export async function requestCheckupAuth(params: NhisCheckupRequest): Promise<Nh
 /**
  * 2차 인증 요청 - 간편인증 확인 후 데이터 조회
  */
-export async function confirmCheckupAuth(params: NhisCheckupConfirmRequest): Promise<NhisCheckupDataResponse> {
+export async function confirmCheckupAuth(params: CheckupConfirmRequest): Promise<CheckupDataResponse> {
 	const response = await fetch(`${API_BASE_URL}/nhis/checkup`, {
 		method: 'POST',
 		headers: {

@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import type { NhisCheckupData } from '@/types/checkup.ts';
+import type { CheckupData } from '@/types/checkupData';
 
 export const CHECKUP_QUERY_KEY = 'checkupData';
 
 export function useCheckupData() {
 	const queryClient = useQueryClient();
 
-	const { data } = useQuery<NhisCheckupData | null>({
+	const { data } = useQuery<CheckupData | null>({
 		queryKey: [CHECKUP_QUERY_KEY],
 		queryFn: async () => null,
 		enabled: false,

@@ -3,7 +3,7 @@ import { DatePickerWithRange } from '@/components/DatePickerWithRange.tsx';
 import { useCheckupData } from '@/hooks/useCheckupData.ts';
 import { useNavigate } from 'react-router-dom';
 import { parse, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
-import type { ResultItem } from '@/types/checkup';
+import type { CheckupResult } from '@/types/checkupData';
 import { ClipboardList } from 'lucide-react';
 import { getCheckupTypeBadge } from '@/utils';
 import { ROUTES } from '@/constants/routes';
@@ -28,7 +28,7 @@ export default function History() {
 		if (!data) return [];
 
 		return data.resultList
-			.filter((item: ResultItem) => {
+			.filter((item: CheckupResult) => {
 				const dateStr = item.checkupDate.split('-').join('');
 				const checkupDate = parse(dateStr, 'yyyyMMdd', new Date());
 
@@ -37,7 +37,7 @@ export default function History() {
 					end: endOfDay(endDate),
 				});
 			})
-			.sort((a: ResultItem, b: ResultItem) => b.checkupDate.localeCompare(a.checkupDate));
+			.sort((a: CheckupResult, b: CheckupResult) => b.checkupDate.localeCompare(a.checkupDate));
 	}, [data, startDate, endDate]);
 
 	if (!data) {
