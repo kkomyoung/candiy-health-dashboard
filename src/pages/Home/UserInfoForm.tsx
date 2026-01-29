@@ -63,7 +63,7 @@ export default function UserInfoForm({ onSubmit, isLoading = false }: UserInfoFo
 				<Input
 					id="legalName"
 					type="text"
-					placeholder="홍길동"
+					placeholder="본명을 입력하세요"
 					value={formData.legalName}
 					onChange={(e) => handleChange('legalName', e.target.value)}
 					required
@@ -71,7 +71,7 @@ export default function UserInfoForm({ onSubmit, isLoading = false }: UserInfoFo
 			</div>
 
 			<div className="space-y-2">
-				<Label htmlFor="birthdate">생년월일</Label>
+				<Label htmlFor="birthdate">생년월일 (숫자 8자리 입력)</Label>
 				<Input
 					id="birthdate"
 					type="text"
@@ -81,23 +81,9 @@ export default function UserInfoForm({ onSubmit, isLoading = false }: UserInfoFo
 					onChange={(e) => handleChange('birthdate', e.target.value.replace(/\D/g, ''))}
 					required
 				/>
-				<p className="text-sm text-muted-foreground">숫자 8자리 (예: 19970101)</p>
 			</div>
 
 			<div className="flex gap-2">
-				<div className="space-y-2 flex-1">
-					<Label htmlFor="phoneNo">전화번호</Label>
-					<Input
-						id="phoneNo"
-						type="tel"
-						placeholder="01012345678"
-						value={formData.phoneNo}
-						onChange={(e) => handleChange('phoneNo', e.target.value.replace(/\D/g, ''))}
-						required
-					/>
-					<p className="text-sm text-muted-foreground">'-' 없이 숫자만 입력</p>
-				</div>
-
 				<div className="space-y-2 flex-1">
 					<Label htmlFor="telecom">통신사</Label>
 					<Select value={formData.telecom} onValueChange={(value) => handleChange('telecom', value)} required>
@@ -112,6 +98,17 @@ export default function UserInfoForm({ onSubmit, isLoading = false }: UserInfoFo
 							))}
 						</SelectContent>
 					</Select>
+				</div>
+				<div className="space-y-2 flex-1">
+					<Label htmlFor="phoneNo">전화번호 ('-'없이 숫자만 입력)</Label>
+					<Input
+						id="phoneNo"
+						type="tel"
+						placeholder="01012345678"
+						value={formData.phoneNo}
+						onChange={(e) => handleChange('phoneNo', e.target.value.replace(/\D/g, ''))}
+						required
+					/>
 				</div>
 			</div>
 
