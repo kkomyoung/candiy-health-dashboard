@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCheckupData } from '@/hooks/useCheckupData';
 import { SearchIcon } from 'lucide-react';
+import EvaluationLabel from '@/components/EvaluationLabel.tsx';
 
 export default function Dashboard() {
 	const navigate = useNavigate();
@@ -48,8 +49,11 @@ export default function Dashboard() {
 	return (
 		<div className="max-w-7xl mx-auto">
 			<h1 className="text-3xl font-bold mb-6">{patientName}님의 최근 건강검진 결과입니다</h1>
-			<p className="text-lg font-semibold mb-4">검진일: {latestCheckup.checkupDate}</p>
-			<ul className="grid grid-cols-4 gap-4 mb-10">
+			<p className="text-lg font-semibold mb-2">검진일: {latestCheckup.checkupDate}</p>
+			<p className="text-lg font-semibold mb-4">
+				판정: <EvaluationLabel value={latestCheckup.evaluation} />
+			</p>
+			<ul className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
 				<li className="bg-white border rounded-xl shadow-md p-6">
 					<dl>
 						<dt className="text-base">키</dt>
