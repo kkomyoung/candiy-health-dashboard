@@ -120,4 +120,16 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* 폼 요소 기본 배경색 */
+  input,
+  select,
+  textarea,
+  [data-slot="select-trigger"],
+  [data-slot="select-content"],
+  [data-slot="select-item"] {
+    background-color: var(--background);
+  }
+  [data-slot="select-content"] {
+    background-color: var(--popover);
+  }
 }
