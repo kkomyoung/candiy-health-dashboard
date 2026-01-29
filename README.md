@@ -71,15 +71,17 @@ npm run preview
 
 ## 프로젝트 구조
 
-src/                                                                                                                                                                                                                             
-├── components/     # 공통 컴포넌트                                                                                                                                                                                              
-├── constants/      # 상수 (라우트, 인증 옵션)                                                                                                                                                                                   
-├── hooks/          # 커스텀 훅                                                                                                                                                                                                  
-├── layouts/        # 레이아웃 컴포넌트                                                                                                                                                                                          
-├── pages/          # 페이지 컴포넌트                                                                                                                                                                                            
-├── router/         # 라우터 설정                                                                                                                                                                                                
-├── services/       # API 호출                                                                                                                                                                                                   
-├── types/          # TypeScript 타입 정의                                                                                                                                                                                       
+```
+src/
+├── components/     # 공통 컴포넌트
+├── constants/      # 상수 (라우트, 인증 옵션)
+├── hooks/          # 커스텀 훅
+├── layouts/        # 레이아웃 컴포넌트
+├── pages/          # 페이지 컴포넌트
+├── router/         # 라우터 설정
+├── services/       # API 호출
+├── types/          # TypeScript 타입 정의
 └── utils/          # 유틸리티 함수
+```
 
 
