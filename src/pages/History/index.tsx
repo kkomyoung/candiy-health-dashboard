@@ -45,8 +45,10 @@ export default function History() {
 
 	return (
 		<div className="max-w-7xl mx-auto">
-			<h2 className="text-3xl font-bold mb-2">건강검진 이력 조회</h2>
-			<p className="text-gray-600 mb-8">최대 10년간의 건강검진 이력을 조회할 수 있습니다</p>
+			<h2 className="text-2xl md:text-3xl font-bold mb-2 break-keep">건강검진 이력 조회</h2>
+			<p className="text-sm md:text-base text-gray-600 mb-8 break-keep">
+				최대 10년간의 건강검진 이력을 조회할 수 있습니다
+			</p>
 
 			<div className="max-w-lg mb-8">
 				<DatePickerWithRange
@@ -81,11 +83,11 @@ export default function History() {
 									<div className="flex-1">
 										{/* 검진 기관 */}
 										<div className="flex items-center gap-2 mb-2">
-											<p className="text-2xl font-bold text-gray-900">{item.organizationName}</p>
+											<p className="text-xl md:text-2xl font-bold text-gray-900">{item.organizationName}</p>
 										</div>
 
 										{/* 검진일 & 검진타입 */}
-										<div className="flex flex-wrap items-center gap-4 text-lg">
+										<div className="flex flex-wrap items-center gap-4 text-base md:text-lg">
 											<div className="flex items-center gap-1.5 text-gray-600">
 												<span>{item.checkupDate}</span>
 											</div>

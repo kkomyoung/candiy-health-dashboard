@@ -63,8 +63,8 @@ export default function BmiChart({ bmi }: DashboardChartProps) {
 		<div className="bg-white border rounded-xl shadow-md p-6">
 			<h2 className="text-xl font-semibold mb-2 text-center">체질량지수 (BMI)</h2>
 
-			<div className="relative">
-				<PieChart width={320} height={180} style={{ margin: '0 auto' }}>
+			<div className="relative w-full max-w-[320px] mx-auto aspect-[320/180]">
+				<PieChart width={320} height={180} className="absolute left-1/2 -translate-x-1/2 max-w-full h-auto">
 					<Pie
 						data={BMI_SEGMENTS}
 						dataKey="value"
@@ -79,7 +79,11 @@ export default function BmiChart({ bmi }: DashboardChartProps) {
 					/>
 				</PieChart>
 
-				<svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 320 180">
+				<svg
+					className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-[320px]"
+					viewBox="0 0 320 180"
+					preserveAspectRatio="xMidYMid meet"
+				>
 					<NeedleComponent bmi={bmi} />
 				</svg>
 			</div>

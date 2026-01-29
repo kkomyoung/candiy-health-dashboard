@@ -4,7 +4,7 @@ import { useCheckupData } from '@/hooks/useCheckupData';
 import { SearchIcon } from 'lucide-react';
 import EvaluationLabel from '@/components/EvaluationLabel.tsx';
 import BmiChart from '@/pages/Dashboard/BmiChart.tsx';
-import ValueWithUnit from '@/components/ValueWithUnit.tsx';
+import CheckupCard from '@/components/CheckupCard.tsx';
 
 export default function Dashboard() {
 	const navigate = useNavigate();
@@ -32,8 +32,8 @@ export default function Dashboard() {
 	if (!latestCheckup) {
 		return (
 			<div className="max-w-7xl mx-auto text-center mt-20">
-				<p className="text-2xl mb-4">
-					<strong className="text-3xl">{patientName}님,</strong> 최근 건강검진 결과가 없습니다.
+				<p className="text-xl md:text-2xl mb-4">
+					<strong className="text-2xl md:text-3xl">{patientName}님,</strong> 최근 건강검진 결과가 없습니다.
 				</p>
 
 				<button
@@ -50,7 +50,9 @@ export default function Dashboard() {
 
 	return (
 		<div className="max-w-7xl mx-auto">
-			<h1 className="text-3xl font-bold mb-6">{patientName}님의 최근 건강검진 결과입니다</h1>
+			<h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-6 break-keep">
+				{patientName}님의 최근 건강검진 결과입니다
+			</h2>
 			<dl className="mb-6 space-y-2">
 				<div className="text-lg">
 					<dt className="inline">검진일: </dt>
@@ -63,73 +65,33 @@ export default function Dashboard() {
 					</dd>
 				</div>
 			</dl>
-			<ul className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+			<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
 				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">키</dt>
-						<dd className="text-right">
-							<ValueWithUnit value={latestCheckup.height} unit={'cm'} />
-						</dd>
-					</dl>
+					<CheckupCard label={'키'} value={latestCheckup.height} unit={'cm'} />
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">혈압</dt>
-						<dd className="text-right">
-							<ValueWithUnit value={latestCheckup.bloodPressure} unit={'mmHg'} />
-						</dd>
-					</dl>
+					<CheckupCard label={'혈압'} value={latestCheckup.bloodPressure} unit={'mmHg'} />
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">식전혈당</dt>
-						<dd className="text-right">
-							<ValueWithUnit value={latestCheckup.fastingBloodGlucose} unit={'mg/dL'} />
-						</dd>
-					</dl>
+					<CheckupCard label={'식전혈당'} value={latestCheckup.fastingBloodGlucose} unit={'mg/dL'} />
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">총콜레스테롤</dt>
-						<dd className="text-right">
-							<ValueWithUnit value={latestCheckup.totalCholesterol} unit={'mg/dL'} />
-						</dd>
-					</dl>
+					<CheckupCard label={'총콜레스테롤'} value={latestCheckup.totalCholesterol} unit={'mg/dL'} />
 				</li>
-				<li className="sm:col-span-1 md:col-span-2 lg:col-span-4">
+				<li className="col-span-1 md:col-span-2 lg:col-span-4">
 					<BmiChart bmi={Number(latestCheckup.BMI)} />
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">HDL콜레스테롤</dt>
-						<dd className="text-right">
-							<ValueWithUnit value={latestCheckup.HDLCholesterol} unit={'mg/dL'} />
-						</dd>
-					</dl>
+					<CheckupCard label={'HDL콜레스테롤'} value={latestCheckup.HDLCholesterol} unit={'mg/dL'} />
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">요단백</dt>
-						<dd className="text-right">
-							<ValueWithUnit value={latestCheckup.proteinuria} unit={''} />
-						</dd>
-					</dl>
+					<CheckupCard label={'요단백'} value={latestCheckup.proteinuria} unit={''} />
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">혈청크레아티닌</dt>
-						<dd className="text-right">
-							<ValueWithUnit value={latestCheckup.serumCreatinine} unit={'mg/dL'} />
-						</dd>
-					</dl>
+					<CheckupCard label={'혈청크레아티닌'} value={latestCheckup.serumCreatinine} unit={'mg/dL'} />
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">트리글리세라이드</dt>
-						<dd className="text-right">
-							<ValueWithUnit value={latestCheckup.triglyceride} unit={'mg/dL'} />
-						</dd>
-					</dl>
+					<CheckupCard label={'트리글리세라이드'} value={latestCheckup.triglyceride} unit={'mg/dL'} />
 				</li>
 			</ul>
 		</div>

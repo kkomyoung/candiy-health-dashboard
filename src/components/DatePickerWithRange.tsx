@@ -26,7 +26,7 @@ export function DatePickerWithRange({ startDate, endDate, setStartDate, setEndDa
 	};
 
 	return (
-		<div className="flex items-end gap-4">
+		<div className="flex flex-col md:flex-row items-end gap-4">
 			<Field>
 				<FieldLabel htmlFor="start-date" className="text-base">
 					시작일
@@ -52,9 +52,6 @@ export function DatePickerWithRange({ startDate, endDate, setStartDate, setEndDa
 					</PopoverContent>
 				</Popover>
 			</Field>
-
-			<span className="text-gray-500 pb-2">~</span>
-
 			<Field>
 				<FieldLabel htmlFor="end-date" className="text-base">
 					종료일

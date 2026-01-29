@@ -91,7 +91,7 @@ export default function MainLayout() {
 			</header>
 
 			{/* 메인 콘텐츠 */}
-			<main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24">
+			<main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 md:pb-20">
 				<Outlet />
 			</main>
 		</div>

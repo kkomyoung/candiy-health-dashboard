@@ -35,10 +35,9 @@ export interface UserInfoFormData {
 
 interface UserInfoFormProps {
 	onSubmit: (data: UserInfoFormData) => void;
-	isLoading?: boolean;
 }
 
-export default function UserInfoForm({ onSubmit, isLoading = false }: UserInfoFormProps) {
+export default function UserInfoForm({ onSubmit }: UserInfoFormProps) {
 	const [formData, setFormData] = useState<UserInfoFormData>({
 		loginTypeLevel: '',
 		legalName: '',
@@ -83,7 +82,7 @@ export default function UserInfoForm({ onSubmit, isLoading = false }: UserInfoFo
 				/>
 			</div>
 
-			<div className="flex gap-2">
+			<div className="flex flex-col md:flex-row gap-2">
 				<div className="space-y-2 flex-1">
 					<Label htmlFor="telecom">통신사</Label>
 					<Select value={formData.telecom} onValueChange={(value) => handleChange('telecom', value)} required>
@@ -134,7 +133,6 @@ export default function UserInfoForm({ onSubmit, isLoading = false }: UserInfoFo
 
 			<button
 				type="submit"
-				disabled={isLoading}
 				className="mt-8 shadow-lg w-full flex items-center justify-center bg-rose-500 text-white px-10 py-4 rounded-lg gap-2 text-xl font-semibold cursor-pointer"
 			>
 				<SearchIcon className="w-6" />
