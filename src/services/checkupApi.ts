@@ -1,12 +1,12 @@
-import type {
-	NhisCheckupRequest,
-	NhisCheckupAuthResponse,
-	NhisCheckupConfirmRequest,
-	NhisCheckupDataResponse,
+import {
+	ApiError,
+	type NhisCheckupRequest,
+	type NhisCheckupAuthResponse,
+	type NhisCheckupConfirmRequest,
+	type NhisCheckupDataResponse,
 } from '@/types/api';
 
-// 개발: Vite proxy 사용, 프로덕션: Vercel rewrites 사용
-const API_BASE_URL = import.meta.env.DEV ? '/api' : '/api';
+const API_BASE_URL = '/api';
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 /**
@@ -22,11 +22,17 @@ export async function requestCheckupAuth(params: NhisCheckupRequest): Promise<Nh
 		body: JSON.stringify(params),
 	});
 
-	if (!response.ok) {
-		throw new Error(`API Error: ${response.status}`);
+	const data = await response.json();
+
+	if (!response.ok || data.status === 'error') {
+		throw new ApiError({
+			status: 'error',
+			message: data.message || `API Error: ${response.status}`,
+			code: data.code || 'UNKNOWN',
+		});
 	}
 
-	return response.json();
+	return data;
 }
 
 /**
@@ -42,9 +48,15 @@ export async function confirmCheckupAuth(params: NhisCheckupConfirmRequest): Pro
 		body: JSON.stringify(params),
 	});
 
-	if (!response.ok) {
-		throw new Error(`API Error: ${response.status}`);
+	const data = await response.json();
+
+	if (!response.ok || data.status === 'error') {
+		throw new ApiError({
+			status: 'error',
+			message: data.message || `API Error: ${response.status}`,
+			code: data.code || 'UNKNOWN',
+		});
 	}
 
-	return response.json();
+	return data;
 }

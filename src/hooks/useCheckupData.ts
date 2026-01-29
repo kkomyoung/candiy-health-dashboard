@@ -1,33 +1,26 @@
-import { useState, useCallback } from 'react';
-import type { NhisCheckupData } from '@/types/checkup';
+import { useCallback } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import type { NhisCheckupData } from '@/types/checkup.ts';
 
-const STORAGE_KEY = 'checkupData';
-
-// sessionStorage에서 데이터 가져오기
-function getStoredCheckupData(): NhisCheckupData | null {
-	const stored = sessionStorage.getItem(STORAGE_KEY);
-	if (!stored) return null;
-
-	try {
-		return JSON.parse(stored);
-	} catch {
-		sessionStorage.removeItem(STORAGE_KEY);
-		return null;
-	}
-}
+export const CHECKUP_QUERY_KEY = 'checkupData';
 
 export function useCheckupData() {
-	// 초기값을 sessionStorage에서 동기적으로 읽어옴
-	const [data, setData] = useState<NhisCheckupData | null>(() => getStoredCheckupData());
+	const queryClient = useQueryClient();
 
+	const { data } = useQuery<NhisCheckupData | null>({
+		queryKey: [CHECKUP_QUERY_KEY],
+		queryFn: async () => null,
+		enabled: false,
+	});
+
+	// 캐시 초기화
 	const clearData = useCallback(() => {
-		sessionStorage.removeItem(STORAGE_KEY);
-		setData(null);
-	}, []);
+		queryClient.removeQueries({ queryKey: [CHECKUP_QUERY_KEY] });
+	}, [queryClient]);
 
 	return {
 		data,
-		hasData: data !== null,
+		hasData: data !== null && data !== undefined,
 		clearData,
 	};
 }

@@ -1,19 +1,16 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Outlet, useNavigate, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Activity, ClipboardList } from 'lucide-react';
 import logo from '@/assets/img/logo.webp';
 import { useAuth } from '@/hooks/useAuth.ts';
+import { useCheckupData } from '@/hooks/useCheckupData.ts';
 
 export default function MainLayout() {
 	const { logout } = useAuth();
+	const { hasData } = useCheckupData();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [sidebarOpen, setSidebarOpen] = useState(false);
-
-	// location 변경 시마다 sessionStorage 체크
-	const hasData = useMemo(() => {
-		return sessionStorage.getItem('checkupData') !== null;
-	}, [location.pathname]);
 
 	const menuItems = [
 		{ path: '/dashboard', label: '최근 건강검진', icon: Activity },

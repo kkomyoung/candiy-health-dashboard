@@ -1,5 +1,23 @@
 import type { NhisCheckupData } from './checkup';
 
+/** API 에러 응답 */
+export interface ApiErrorResponse {
+	status: 'error';
+	message: string;
+	code: string;
+}
+
+/** API 에러 클래스 */
+export class ApiError extends Error {
+	code: string;
+
+	constructor(response: ApiErrorResponse) {
+		super(response.message);
+		this.name = 'ApiError';
+		this.code = response.code;
+	}
+}
+
 /** 건강검진 조회 요청 */
 export interface NhisCheckupRequest {
 	id: string;

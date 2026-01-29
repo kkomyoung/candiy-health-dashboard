@@ -1,3 +1,5 @@
+import { useQueryClient } from '@tanstack/react-query';
+
 export interface User {
 	name: string;
 }
@@ -6,6 +8,8 @@ export interface User {
  * localStorage 기반의 mock 로그인 hook
  */
 export function useAuth() {
+	const queryClient = useQueryClient();
+
 	const getUser = (): User | null => {
 		const user = localStorage.getItem('user');
 		return user ? JSON.parse(user) : null;
@@ -17,7 +21,7 @@ export function useAuth() {
 
 	const logout = () => {
 		localStorage.removeItem('user');
-		sessionStorage.removeItem('checkupData'); // 건강검진 데이터도 삭제
+		queryClient.clear();
 	};
 
 	const isAuthenticated = (): boolean => {
