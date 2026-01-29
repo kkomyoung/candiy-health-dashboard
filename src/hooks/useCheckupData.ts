@@ -15,7 +15,7 @@ export function useCheckupData() {
 
 	// 캐시 초기화
 	const clearData = useCallback(() => {
-		queryClient.removeQueries({ queryKey: [CHECKUP_QUERY_KEY] });
+		queryClient.setQueryData([CHECKUP_QUERY_KEY], null);
 	}, [queryClient]);
 
 	return {
