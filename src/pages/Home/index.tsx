@@ -10,8 +10,16 @@ export default function Home() {
 	const navigate = useNavigate();
 	const { getUser } = useAuth();
 	const { hasData } = useCheckupData();
-	const { requestAuth, isRequestPending, isRequestSuccess, confirmAuth, isConfirmPending, confirmError, cancelAuth } =
-		useCheckup();
+	const {
+		isModalOpen,
+		requestAuth,
+		isRequestPending,
+		isRequestSuccess,
+		confirmAuth,
+		isConfirmPending,
+		error,
+		cancelAuth,
+	} = useCheckup();
 
 	// 이미 건강검진 데이터가 있으면 대시보드로 이동
 	useEffect(() => {
@@ -35,11 +43,11 @@ export default function Home() {
 
 			{/* 인증 관련 모달 */}
 			<AuthModal
-				isOpen={isRequestPending || isRequestSuccess || isConfirmPending || !!confirmError}
+				isOpen={isModalOpen}
 				isRequestPending={isRequestPending}
 				isRequestSuccess={isRequestSuccess}
 				isConfirmPending={isConfirmPending}
-				error={confirmError}
+				error={error}
 				onCancel={cancelAuth}
 				onConfirm={confirmAuth}
 			/>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { parse, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
 import type { ResultItem } from '@/types/checkup';
 import { ClipboardList } from 'lucide-react';
-import { getCheckupTypeBadge } from '@/utils/checkup.ts';
+import { getCheckupTypeBadge } from '@/utils';
 
 export default function History() {
 	const today = new Date();

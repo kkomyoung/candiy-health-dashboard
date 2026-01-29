@@ -2,14 +2,9 @@ import { useEffect, type ReactNode } from 'react';
 import { Spinner } from '@/components/ui/spinner.tsx';
 import { useCountdown } from '@/hooks/useCountdown';
 import { ApiError } from '@/types/api';
+import { formatTime } from '@/utils';
 
 const AUTH_TIMEOUT_SECONDS = 300;
-
-const formatTime = (seconds: number) => {
-	const min = Math.floor(seconds / 60);
-	const sec = seconds % 60;
-	return `${min}:${sec.toString().padStart(2, '0')}`;
-};
 
 interface AuthModalProps {
 	isOpen: boolean;
@@ -65,7 +60,12 @@ export const AuthModal = ({
 	if (isRequestPending) {
 		message = '본인인증 요청 중 입니다';
 		showSpinner = true;
+	} else if (error && !isRequestSuccess) {
+		// 1차 인증 에러 (TE-001 등)
+		message = errorMessage;
+		showConfirm = false;
 	} else if (isRequestSuccess && !isConfirmPending) {
+		// 1차 인증 성공, 2차 인증 대기 또는 2차 인증 에러
 		if (isRetryableError) {
 			message = (
 				<>
@@ -77,9 +77,11 @@ export const AuthModal = ({
 			showConfirm = true;
 			showTimer = true;
 		} else if (errorMessage) {
+			// 2차 인증 에러 (재시도 불가)
 			message = errorMessage;
 			showConfirm = false;
 		} else {
+			// 정상: 간편인증 대기
 			message = '간편인증 앱에서 인증을 완료한 후 버튼을 눌러주세요';
 			showConfirm = true;
 			showTimer = true;

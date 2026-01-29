@@ -18,6 +18,9 @@ export function useCheckup() {
 	const uuid = crypto.randomUUID();
 	const navigate = useNavigate();
 
+	// 인증 모달 열림 상태
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	// 1차 인증에서 사용한 요청 파라미터 저장 (2차 인증에서 필요)
 	const [requestParams, setRequestParams] = useState<NhisCheckupRequest | null>(() => null);
 
@@ -43,11 +46,16 @@ export function useCheckup() {
 		isPending: isRequestPending,
 		isSuccess: isRequestSuccess,
 		data: authData,
+		error: requestError,
 		reset: requestReset,
 	} = useMutation({
 		mutationFn: (formData: UserFormInput) => {
 			const params = createRequestParams(formData);
 			return requestCheckupAuth(params);
+		},
+		onMutate: () => {
+			// mutation 시작 시 모달 열기
+			setIsModalOpen(true);
 		},
 		onSuccess: (data, variables) => {
 			console.log('1차 인증 요청 완료. 간편인증을 진행해주세요.', data);
@@ -63,8 +71,6 @@ export function useCheckup() {
 	const {
 		mutate: confirmAuthMutate,
 		isPending: isConfirmPending,
-		isSuccess: isConfirmSuccess,
-		data: checkupData,
 		error: confirmError,
 		reset: confirmReset,
 	} = useMutation({
@@ -98,39 +104,28 @@ export function useCheckup() {
 	}, [requestParams, authData, confirmAuthMutate]);
 
 	// 인증 취소
-	const cancelAuth = () => {
-		// TODO: 취소 호출하면 400 error 발생, 간편인증 취소되지 않음
-		// const multiFactorInfo: MultiFactorInfo | undefined = authData?.data;
-		//
-		// if (requestParams && multiFactorInfo) {
-		// 	try {
-		// 		await confirmCheckupAuth({
-		// 			...requestParams,
-		// 			isContinue: '0', // cancel
-		// 			multiFactorInfo,
-		// 		});
-		// 	} catch (error) {
-		// 		console.warn('인증 취소 API 호출 실패', error);
-		// 	}
-		// }
-
+	const cancelAuth = useCallback(() => {
+		setIsModalOpen(false);
 		requestReset();
 		confirmReset();
 		setRequestParams(null);
-	};
+	}, [requestReset, confirmReset]);
+
+	// 1차 또는 2차 인증 에러 (모달에서 통합 표시)
+	const error = requestError || confirmError;
 
 	return {
+		// 모달 상태
+		isModalOpen,
 		// 1차 인증
 		requestAuth,
 		isRequestPending,
-		isRequestSuccess: isRequestSuccess,
-		authData,
+		isRequestSuccess,
 		// 2차 인증
 		confirmAuth,
 		isConfirmPending,
-		isConfirmSuccess,
-		checkupData,
-		confirmError,
+		// 에러 (통합)
+		error,
 		// 취소
 		cancelAuth,
 	};
