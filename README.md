@@ -1,4 +1,5 @@
 # 건강검진 대시보드
+url : https://candiy-health-dashboard-pearl.vercel.app
 
 ## 기술 스택
 
