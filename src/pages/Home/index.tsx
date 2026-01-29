@@ -17,15 +17,8 @@ export default function Home() {
 	const navigate = useNavigate();
 	const { getUser } = useAuth();
 	const { hasData } = useCheckupData();
-	const {
-		requestAuth,
-		isRequestPending,
-		isRequestSuccess,
-		confirmAuth,
-		isConfirmPending,
-		cancelAuth,
-		remainingTime,
-	} = useCheckup();
+	const { requestAuth, isRequestPending, isRequestSuccess, confirmAuth, isConfirmPending, cancelAuth, remainingTime } =
+		useCheckup();
 
 	// 이미 건강검진 데이터가 있으면 대시보드로 이동
 	useEffect(() => {
@@ -57,9 +50,7 @@ export default function Home() {
 				<div className="flex flex-col items-center gap-4 mt-6">
 					<p className="text-center text-gray-600">간편인증 앱에서 인증을 완료한 후 버튼을 눌러주세요</p>
 					{remainingTime !== null && (
-						<p className="text-center text-sm text-orange-600">
-							남은 시간: {formatRemainingTime(remainingTime)}
-						</p>
+						<p className="text-center text-sm text-orange-600">남은 시간: {formatRemainingTime(remainingTime)}</p>
 					)}
 					<div className="flex gap-4">
 						<button onClick={confirmAuth} className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
