@@ -4,6 +4,7 @@ import { useCheckupData } from '@/hooks/useCheckupData';
 import { SearchIcon } from 'lucide-react';
 import EvaluationLabel from '@/components/EvaluationLabel.tsx';
 import BmiChart from '@/pages/Dashboard/BmiChart.tsx';
+import ValueWithUnit from '@/components/ValueWithUnit.tsx';
 
 export default function Dashboard() {
 	const navigate = useNavigate();
@@ -66,30 +67,71 @@ export default function Dashboard() {
 				<li className="bg-white border rounded-xl shadow-md p-6">
 					<dl>
 						<dt className="text-base">키</dt>
-						<dd className="text-2xl text-right">{latestCheckup.height}cm</dd>
+						<dd className="text-right">
+							<ValueWithUnit value={latestCheckup.height} unit={'cm'} />
+						</dd>
 					</dl>
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
 					<dl>
 						<dt className="text-base">혈압</dt>
-						<dd className="text-2xl text-right">{latestCheckup.bloodPressure}mmHg</dd>
+						<dd className="text-right">
+							<ValueWithUnit value={latestCheckup.bloodPressure} unit={'mmHg'} />
+						</dd>
 					</dl>
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
 					<dl>
 						<dt className="text-base">식전혈당</dt>
-						<dd className="text-2xl text-right">{latestCheckup.fastingBloodGlucose}mg/dL</dd>
+						<dd className="text-right">
+							<ValueWithUnit value={latestCheckup.fastingBloodGlucose} unit={'mg/dL'} />
+						</dd>
 					</dl>
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
 					<dl>
-						<dt className="text-base">혈색소</dt>
-						<dd className="text-2xl text-right">{latestCheckup.hemoglobin}g/dL</dd>
+						<dt className="text-base">총콜레스테롤</dt>
+						<dd className="text-right">
+							<ValueWithUnit value={latestCheckup.totalCholesterol} unit={'mg/dL'} />
+						</dd>
+					</dl>
+				</li>
+				<li className="sm:col-span-1 md:col-span-2 lg:col-span-4">
+					<BmiChart bmi={Number(latestCheckup.BMI)} />
+				</li>
+				<li className="bg-white border rounded-xl shadow-md p-6">
+					<dl>
+						<dt className="text-base">HDL콜레스테롤</dt>
+						<dd className="text-right">
+							<ValueWithUnit value={latestCheckup.HDLCholesterol} unit={'mg/dL'} />
+						</dd>
+					</dl>
+				</li>
+				<li className="bg-white border rounded-xl shadow-md p-6">
+					<dl>
+						<dt className="text-base">요단백</dt>
+						<dd className="text-right">
+							<ValueWithUnit value={latestCheckup.proteinuria} unit={''} />
+						</dd>
+					</dl>
+				</li>
+				<li className="bg-white border rounded-xl shadow-md p-6">
+					<dl>
+						<dt className="text-base">혈청크레아티닌</dt>
+						<dd className="text-right">
+							<ValueWithUnit value={latestCheckup.serumCreatinine} unit={'mg/dL'} />
+						</dd>
+					</dl>
+				</li>
+				<li className="bg-white border rounded-xl shadow-md p-6">
+					<dl>
+						<dt className="text-base">트리글리세라이드</dt>
+						<dd className="text-right">
+							<ValueWithUnit value={latestCheckup.triglyceride} unit={'mg/dL'} />
+						</dd>
 					</dl>
 				</li>
 			</ul>
-
-			<BmiChart bmi={Number(latestCheckup.BMI)} />
 		</div>
 	);
 }
