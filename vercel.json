@@ -1,0 +1,8 @@
+{
+	"rewrites": [
+		{
+			"source": "/api/nhis/:path*",
+			"destination": "https://api.candiy.io/v1/nhis/:path*"
+		}
+	]
+}

@@ -17,6 +17,7 @@ export function useAuth() {
 
 	const logout = () => {
 		localStorage.removeItem('user');
+		sessionStorage.removeItem('checkupData'); // 건강검진 데이터도 삭제
 	};
 
 	const isAuthenticated = (): boolean => {

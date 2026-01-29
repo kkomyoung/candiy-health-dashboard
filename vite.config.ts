@@ -11,4 +11,13 @@ export default defineConfig({
 			'@': path.resolve(__dirname, './src'),
 		},
 	},
+	server: {
+		proxy: {
+			'/api/nhis': {
+				target: 'https://api.candiy.io',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api\/nhis/, '/v1/nhis'),
+			},
+		},
+	},
 });
