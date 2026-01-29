@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import { useCheckup } from '@/hooks/useCheckup';
+import { useCheckupAuth } from '@/hooks/useCheckupAuth.ts';
 import { useCheckupData } from '@/hooks/useCheckupData';
 import { ROUTES } from '@/constants/routes';
 import UserInfoForm from './UserInfoForm';
@@ -20,7 +20,7 @@ export default function Home() {
 		isConfirmPending,
 		error,
 		cancelAuth,
-	} = useCheckup();
+	} = useCheckupAuth();
 
 	// 이미 건강검진 데이터가 있으면 대시보드로 이동
 	useEffect(() => {

@@ -13,7 +13,7 @@ export interface UserFormInput {
 	telecom: string;
 }
 
-export function useCheckup() {
+export function useCheckupAuth() {
 	const queryClient = useQueryClient();
 	const uuid = crypto.randomUUID();
 	const navigate = useNavigate();
