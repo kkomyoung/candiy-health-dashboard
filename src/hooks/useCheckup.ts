@@ -41,7 +41,7 @@ function getStoredAuthSession(): StoredAuthSession | null {
 }
 
 // 인증 세션 저장
-function saveAuthSession(requestParams: NhisCheckupRequest, multiFactorInfo: object) {
+function saveAuthSession(requestParams: NhisCheckupRequest, multiFactorInfo: MultiFactorInfo) {
 	const session: StoredAuthSession = {
 		requestParams,
 		multiFactorInfo,
