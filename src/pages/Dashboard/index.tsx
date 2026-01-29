@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCheckupData } from '@/hooks/useCheckupData';
 import { SearchIcon } from 'lucide-react';
 import EvaluationLabel from '@/components/EvaluationLabel.tsx';
+import BmiChart from '@/pages/Dashboard/BmiChart.tsx';
 
 export default function Dashboard() {
 	const navigate = useNavigate();
@@ -49,21 +50,23 @@ export default function Dashboard() {
 	return (
 		<div className="max-w-7xl mx-auto">
 			<h1 className="text-3xl font-bold mb-6">{patientName}님의 최근 건강검진 결과입니다</h1>
-			<p className="text-lg font-semibold mb-2">검진일: {latestCheckup.checkupDate}</p>
-			<p className="text-lg font-semibold mb-4">
-				판정: <EvaluationLabel value={latestCheckup.evaluation} />
-			</p>
-			<ul className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+			<dl className="mb-6 space-y-2">
+				<div className="text-lg">
+					<dt className="inline">검진일: </dt>
+					<dd className="inline">{latestCheckup.checkupDate}</dd>
+				</div>
+				<div className="text-lg">
+					<dt className="inline">판정: </dt>
+					<dd className="inline">
+						<EvaluationLabel value={latestCheckup.evaluation} />
+					</dd>
+				</div>
+			</dl>
+			<ul className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
 				<li className="bg-white border rounded-xl shadow-md p-6">
 					<dl>
 						<dt className="text-base">키</dt>
 						<dd className="text-2xl text-right">{latestCheckup.height}cm</dd>
-					</dl>
-				</li>
-				<li className="bg-white border rounded-xl shadow-md p-6">
-					<dl>
-						<dt className="text-base">몸무게</dt>
-						<dd className="text-2xl text-right">{latestCheckup.weight}kg</dd>
 					</dl>
 				</li>
 				<li className="bg-white border rounded-xl shadow-md p-6">
@@ -78,7 +81,15 @@ export default function Dashboard() {
 						<dd className="text-2xl text-right">{latestCheckup.fastingBloodGlucose}mg/dL</dd>
 					</dl>
 				</li>
+				<li className="bg-white border rounded-xl shadow-md p-6">
+					<dl>
+						<dt className="text-base">혈색소</dt>
+						<dd className="text-2xl text-right">{latestCheckup.hemoglobin}g/dL</dd>
+					</dl>
+				</li>
 			</ul>
+
+			<BmiChart bmi={Number(latestCheckup.BMI)} />
 		</div>
 	);
 }
