@@ -4,6 +4,7 @@ import { Menu } from 'lucide-react';
 import logo from '@/assets/img/logo.webp';
 import { useAuth } from '@/hooks/useAuth.ts';
 import { useCheckupData } from '@/hooks/useCheckupData.ts';
+import { ROUTES } from '@/constants/routes';
 import SideMenu from '@/components/SideMenu.tsx';
 
 export default function MainLayout() {
@@ -13,7 +14,7 @@ export default function MainLayout() {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	const handleLogout = () => {
-		navigate('/login');
+		navigate(ROUTES.LOGIN);
 		logout();
 		setSidebarOpen(false);
 	};

@@ -3,27 +3,7 @@ import { Input } from '@/components/ui/input.tsx';
 import { Label } from '@/components/ui/label.tsx';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select.tsx';
 import { SearchIcon } from 'lucide-react';
-
-const LOGIN_TYPE_OPTIONS = [
-	{ value: '1', label: '카카오톡' },
-	{ value: '3', label: '삼성패스' },
-	{ value: '4', label: '국민은행(국민인증서)' },
-	{ value: '5', label: '통신사(PASS)' },
-	{ value: '6', label: '네이버' },
-	{ value: '7', label: '신한은행(신한인증서)' },
-	{ value: '8', label: '토스' },
-	{ value: '9', label: '뱅크샐러드' },
-	{ value: '10', label: '하나은행(하나인증서)' },
-	{ value: '11', label: 'NH모바일인증서' },
-	{ value: '12', label: '우리은행(우리인증서)' },
-	{ value: '13', label: '카카오뱅크' },
-];
-
-const TELECOM_OPTIONS = [
-	{ value: '0', label: 'SKT (SKT 알뜰폰)' },
-	{ value: '1', label: 'KT (KT 알뜰폰)' },
-	{ value: '2', label: 'LG U+ (LG U+ 알뜰폰)' },
-];
+import { LOGIN_TYPE_OPTIONS, TELECOM_OPTIONS } from '@/constants/auth';
 
 export interface UserInfoFormData {
 	loginTypeLevel: string;
@@ -33,11 +13,7 @@ export interface UserInfoFormData {
 	telecom: string;
 }
 
-interface UserInfoFormProps {
-	onSubmit: (data: UserInfoFormData) => void;
-}
-
-export default function UserInfoForm({ onSubmit }: UserInfoFormProps) {
+export default function UserInfoForm({ onSubmit }: { onSubmit: (data: UserInfoFormData) => void }) {
 	const [formData, setFormData] = useState<UserInfoFormData>({
 		loginTypeLevel: '',
 		legalName: '',
@@ -46,17 +22,18 @@ export default function UserInfoForm({ onSubmit }: UserInfoFormProps) {
 		telecom: '',
 	});
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		onSubmit(formData);
-	};
-
 	const handleChange = (field: keyof UserInfoFormData, value: string) => {
 		setFormData((prev) => ({ ...prev, [field]: value }));
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="w-full space-y-4">
+		<form
+			onSubmit={(e) => {
+				e.preventDefault();
+				onSubmit(formData);
+			}}
+			className="w-full space-y-4"
+		>
 			<div className="space-y-2">
 				<Label htmlFor="legalName">이름</Label>
 				<Input

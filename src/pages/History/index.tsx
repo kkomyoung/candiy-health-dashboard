@@ -6,6 +6,7 @@ import { parse, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
 import type { ResultItem } from '@/types/checkup';
 import { ClipboardList } from 'lucide-react';
 import { getCheckupTypeBadge } from '@/utils';
+import { ROUTES } from '@/constants/routes';
 
 export default function History() {
 	const today = new Date();
@@ -18,7 +19,7 @@ export default function History() {
 	// 데이터가 없으면 홈으로 리다이렉트
 	useEffect(() => {
 		if (!hasData) {
-			navigate('/', { replace: true });
+			navigate(ROUTES.HOME, { replace: true });
 		}
 	}, [hasData, navigate]);
 

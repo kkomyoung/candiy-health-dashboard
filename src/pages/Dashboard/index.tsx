@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCheckupData } from '@/hooks/useCheckupData';
+import { ROUTES } from '@/constants/routes';
 import { SearchIcon } from 'lucide-react';
 import EvaluationLabel from '@/components/EvaluationLabel.tsx';
 import BmiChart from '@/pages/Dashboard/BmiChart.tsx';
@@ -13,7 +14,7 @@ export default function Dashboard() {
 	// 데이터가 없으면 홈으로 리다이렉트
 	useEffect(() => {
 		if (!hasData) {
-			navigate('/', { replace: true });
+			navigate(ROUTES.HOME, { replace: true });
 		}
 	}, [hasData, navigate]);
 

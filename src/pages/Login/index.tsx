@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth.ts';
+import { ROUTES } from '@/constants/routes';
 import logo from '@/assets/img/logo.webp';
 
 export default function Login() {
@@ -10,13 +11,13 @@ export default function Login() {
 
 	// 이미 로그인된 사용자의 로그인 페이지 접근을 방지
 	if (isAuthenticated()) {
-		return <Navigate to="/" replace />;
+		return <Navigate to={ROUTES.HOME} replace />;
 	}
 
 	const handleSubmit = () => {
 		if (name.trim()) {
 			login(name.trim());
-			navigate('/');
+			navigate(ROUTES.HOME);
 		}
 	};
 

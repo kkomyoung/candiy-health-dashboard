@@ -1,6 +1,7 @@
 import logo from '@/assets/img/logo.webp';
 import { Activity, ClipboardList, X, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '@/constants/routes';
 
 type sideMenuProps = { sidebarOpen: boolean; setSidebarOpen: (value: boolean) => void };
 
@@ -11,8 +12,8 @@ type typeMenuItems = {
 };
 
 const MENU_ITEMS: typeMenuItems[] = [
-	{ path: '/dashboard', label: '최근 건강검진', icon: Activity },
-	{ path: '/history', label: '건강검진 이력 조회', icon: ClipboardList },
+	{ path: ROUTES.DASHBOARD, label: '최근 건강검진', icon: Activity },
+	{ path: ROUTES.HISTORY, label: '건강검진 이력 조회', icon: ClipboardList },
 ];
 
 const SideMenu = ({ sidebarOpen, setSidebarOpen }: sideMenuProps) => {

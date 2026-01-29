@@ -5,10 +5,11 @@ import Login from '@/pages/Login';
 import Home from '@/pages/Home';
 import Dashboard from '@/pages/Dashboard';
 import History from '@/pages/History';
+import { ROUTES } from '@/constants/routes';
 
 export const router = createBrowserRouter([
 	{
-		path: '/login',
+		path: ROUTES.LOGIN,
 		element: <Login />,
 	},
 	{
@@ -18,15 +19,15 @@ export const router = createBrowserRouter([
 				element: <MainLayout />,
 				children: [
 					{
-						path: '/',
+						path: ROUTES.HOME,
 						element: <Home />,
 					},
 					{
-						path: '/dashboard',
+						path: ROUTES.DASHBOARD,
 						element: <Dashboard />,
 					},
 					{
-						path: '/history',
+						path: ROUTES.HISTORY,
 						element: <History />,
 					},
 				],

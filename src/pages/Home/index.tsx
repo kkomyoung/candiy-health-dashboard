@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useCheckup } from '@/hooks/useCheckup';
 import { useCheckupData } from '@/hooks/useCheckupData';
+import { ROUTES } from '@/constants/routes';
 import UserInfoForm from './UserInfoForm';
 import { AuthModal } from '@/pages/Home/AuthModal.tsx';
 
@@ -24,7 +25,7 @@ export default function Home() {
 	// 이미 건강검진 데이터가 있으면 대시보드로 이동
 	useEffect(() => {
 		if (hasData) {
-			navigate('/dashboard', { replace: true });
+			navigate(ROUTES.DASHBOARD, { replace: true });
 		}
 	}, [hasData, navigate]);
 
