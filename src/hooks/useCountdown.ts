@@ -12,6 +12,9 @@ interface UseCountdownReturn {
 	reset: () => void;
 }
 
+/**
+ *  카운트다운 타이머 hook
+ */
 export function useCountdown({ initialSeconds, autoStart = false }: UseCountdownOptions): UseCountdownReturn {
 	const [remainingTime, setRemainingTime] = useState(initialSeconds);
 	const [isRunning, setIsRunning] = useState(autoStart);

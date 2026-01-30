@@ -1,9 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestCheckupAuth, confirmCheckupAuth } from '@/services/checkupApi';
 import type { CheckupAuthRequest, MultiFactorInfo } from '@/types/checkupAuth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CHECKUP_QUERY_KEY } from '@/hooks/useCheckupData.ts';
+import { ROUTES } from '@/constants/routes.ts';
 
 export interface UserFormInput {
 	loginTypeLevel: string;
@@ -13,9 +14,12 @@ export interface UserFormInput {
 	telecom: string;
 }
 
+/**
+ * 건강검진 조회 인증 플로우 관리 훅
+ */
 export function useCheckupAuth() {
 	const queryClient = useQueryClient();
-	const uuid = crypto.randomUUID();
+	const uuidRef = useRef(crypto.randomUUID());
 	const navigate = useNavigate();
 
 	// 인증 모달 열림 상태
@@ -28,7 +32,7 @@ export function useCheckupAuth() {
 	const createRequestParams = useCallback((formData: UserFormInput): CheckupAuthRequest => {
 		const currentYear = new Date().getFullYear();
 		return {
-			id: uuid,
+			id: `${uuidRef}`,
 			loginTypeLevel: formData.loginTypeLevel,
 			legalName: formData.legalName,
 			birthdate: formData.birthdate,
@@ -57,13 +61,10 @@ export function useCheckupAuth() {
 			// mutation 시작 시 모달 열기
 			setIsModalOpen(true);
 		},
-		onSuccess: (data, variables) => {
-			console.log('1차 인증 요청 완료. 간편인증을 진행해주세요.', data);
+		onSuccess: (_, variables) => {
+			// 2차 인증에 사용하기 위해 호출 시 전달한 인자 저장
 			const params = createRequestParams(variables);
 			setRequestParams(params);
-		},
-		onError: (error) => {
-			console.error('1차 인증 요청 실패', error);
 		},
 	});
 
@@ -76,14 +77,10 @@ export function useCheckupAuth() {
 	} = useMutation({
 		mutationFn: confirmCheckupAuth,
 		onSuccess: (data) => {
-			console.log('2차 인증 완료', data);
 			if (data.status === 'success' && data.data) {
 				queryClient.setQueryData([CHECKUP_QUERY_KEY], data.data);
-				navigate('/dashboard');
+				navigate(ROUTES.DASHBOARD);
 			}
-		},
-		onError: (error) => {
-			console.error('2차 인증 실패', error);
 		},
 	});
 

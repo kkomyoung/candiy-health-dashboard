@@ -4,6 +4,9 @@ import type { CheckupData } from '@/types/checkupData';
 
 export const CHECKUP_QUERY_KEY = 'checkupData';
 
+/**
+ * 건강검진 데이터 캐시 관리 hook
+ */
 export function useCheckupData() {
 	const queryClient = useQueryClient();
 
