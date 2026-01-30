@@ -92,8 +92,8 @@ export const AuthModal = ({
 	}
 
 	return (
-		<div className="fixed inset-0 z-50 bg-black/60 flex justify-center items-center">
-			<div className="min-w-md bg-white pt-10 pb-6 px-6 flex flex-col items-center rounded-xl">
+		<div className="fixed inset-0 z-50 bg-black/60 flex justify-center items-center px-4">
+			<div className="w-full sm:max-w-md bg-white pt-10 pb-6 px-6 flex flex-col items-center rounded-xl">
 				{showSpinner && <Spinner className="text-rose-400" />}
 				{showTimer && (
 					<p className={`text-3xl font-bold ${remainingTime <= 30 ? 'text-rose-500' : 'text-gray-700'}`}>
