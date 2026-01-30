@@ -40,7 +40,11 @@ export default function MainLayout() {
 					</div>
 					<button
 						className="text-sm hover:underline cursor-pointer text-gray-700 hover:text-gray-900"
-						onClick={handleLogout}
+						onClick={() => {
+							if (confirm('로그아웃 하시겠습니까?')) {
+								handleLogout();
+							}
+						}}
 					>
 						로그아웃
 					</button>
