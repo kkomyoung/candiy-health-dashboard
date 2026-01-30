@@ -79,9 +79,11 @@ export default function Dashboard() {
 				<li className="bg-white border rounded-xl shadow-md p-6">
 					<CheckupCard label={'총콜레스테롤'} value={latestCheckup.totalCholesterol} unit={'mg/dL'} />
 				</li>
-				<li className="col-span-1 md:col-span-2 lg:col-span-4">
-					<BmiChart bmi={Number(latestCheckup.BMI)} />
-				</li>
+				{latestCheckup.BMI && (
+					<li className="col-span-1 md:col-span-2 lg:col-span-4">
+						<BmiChart bmi={Number(latestCheckup.BMI)} />
+					</li>
+				)}
 				<li className="bg-white border rounded-xl shadow-md p-6">
 					<CheckupCard label={'HDL콜레스테롤'} value={latestCheckup.HDLCholesterol} unit={'mg/dL'} />
 				</li>
