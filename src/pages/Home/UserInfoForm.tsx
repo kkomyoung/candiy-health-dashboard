@@ -30,6 +30,23 @@ export default function UserInfoForm({ onSubmit }: { onSubmit: (data: UserInfoFo
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
+
+				const { loginTypeLevel, telecom } = formData;
+				if (!loginTypeLevel && !telecom) {
+					alert('통신사와 간편인증 방식을 선택해주세요.');
+					return;
+				}
+
+				if (!loginTypeLevel) {
+					alert('간편인증 방식을 선택해주세요.');
+					return;
+				}
+
+				if (!telecom) {
+					alert('통신사를 선택해주세요.');
+					return;
+				}
+
 				onSubmit(formData);
 			}}
 			className="w-full space-y-4"
@@ -52,6 +69,7 @@ export default function UserInfoForm({ onSubmit }: { onSubmit: (data: UserInfoFo
 					id="birthdate"
 					type="text"
 					placeholder="YYYYMMDD"
+					minLength={8}
 					maxLength={8}
 					value={formData.birthdate}
 					onChange={(e) => handleChange('birthdate', e.target.value.replace(/\D/g, ''))}
@@ -82,6 +100,8 @@ export default function UserInfoForm({ onSubmit }: { onSubmit: (data: UserInfoFo
 						type="tel"
 						placeholder="01012345678"
 						value={formData.phoneNo}
+						maxLength={11}
+						minLength={10}
 						onChange={(e) => handleChange('phoneNo', e.target.value.replace(/\D/g, ''))}
 						required
 					/>
